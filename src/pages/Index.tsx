@@ -62,6 +62,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Top Mobile Ad Container */}
+      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm">
+        <div className="w-80 h-12 bg-gray-200 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
+          <span className="text-xs text-gray-500 font-medium">Mobile Ad 320×50</span>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 lg:py-16">
         <div className="text-center mb-12 lg:mb-20">
@@ -244,6 +251,13 @@ const Index = () => {
               <span className="text-sm lg:text-base">AI-Powered</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Bottom Mobile Ad Container */}
+      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm border-t border-gray-200/50">
+        <div className="w-80 h-12 bg-gray-200 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
+          <span className="text-xs text-gray-500 font-medium">Mobile Ad 320×50</span>
         </div>
       </div>
     </div>
