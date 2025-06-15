@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { generateAnswer, getRateLimitStatus } from '@/services/geminiService';
 import { useToast } from '@/hooks/use-toast';
 
@@ -15,7 +15,6 @@ const Index = () => {
   const [answer, setAnswer] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [cooldownTime, setCooldownTime] = useState(0);
-  const [rateLimits, setRateLimits] = useState({ requestsThisMinute: 30, requestsToday: 1400, tokensToday: 60000 });
   const { toast } = useToast();
 
   const markOptions = [
@@ -23,19 +22,6 @@ const Index = () => {
     { value: 13 as const, label: '13 Mark', description: 'Detailed explanation' },
     { value: 15 as const, label: '15 Mark', description: 'Comprehensive analysis' }
   ];
-
-  // Update rate limit status
-  useEffect(() => {
-    const updateRateLimits = () => {
-      const limits = getRateLimitStatus();
-      setRateLimits(limits);
-    };
-
-    updateRateLimits();
-    const interval = setInterval(updateRateLimits, 5000); // Update every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   // Cooldown timer
   useEffect(() => {
@@ -158,29 +144,6 @@ const Index = () => {
               <span className="text-sm lg:text-base font-medium text-gray-700">Structured Answers</span>
             </div>
           </div>
-        </div>
-
-        {/* Rate Limit Status */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <Card className="p-4 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-blue-600" />
-                <span className="font-medium text-gray-700">API Usage Status</span>
-              </div>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <Badge variant="outline" className="bg-white/50">
-                  Requests/min: {rateLimits.requestsThisMinute}/30
-                </Badge>
-                <Badge variant="outline" className="bg-white/50">
-                  Requests/day: {rateLimits.requestsToday}/1400
-                </Badge>
-                <Badge variant="outline" className="bg-white/50">
-                  Tokens/day: {rateLimits.tokensToday.toLocaleString()}/80,000
-                </Badge>
-              </div>
-            </div>
-          </Card>
         </div>
 
         {/* Main Application */}

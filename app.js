@@ -1,4 +1,5 @@
 
+
 // Stubud AI - Academic Answer Generator
 // Main application logic
 
@@ -212,12 +213,6 @@ class StubudApp {
 
     init() {
         this.bindEvents();
-        this.updateRateLimitDisplay();
-        
-        // Update rate limit display every 10 seconds
-        setInterval(() => {
-            this.updateRateLimitDisplay();
-        }, 10000);
     }
 
     bindEvents() {
@@ -233,14 +228,6 @@ class StubudApp {
                 this.generateAnswer();
             }
         });
-    }
-
-    updateRateLimitDisplay() {
-        const limits = this.rateLimiter.getRemainingLimits();
-        
-        document.getElementById('requests-minute').textContent = limits.requestsThisMinute;
-        document.getElementById('requests-day').textContent = limits.requestsToday;
-        document.getElementById('tokens-day').textContent = limits.tokensToday;
     }
 
     async generateAnswer() {
@@ -297,7 +284,6 @@ class StubudApp {
             answerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             console.log('Answer generated successfully');
-            this.updateRateLimitDisplay();
             
         } catch (error) {
             console.error('Error generating answer:', error);
