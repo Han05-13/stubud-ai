@@ -1,4 +1,3 @@
-
 // Stubud AI - Academic Answer Generator
 // Main application logic
 
@@ -8,7 +7,7 @@ class RateLimiter {
         this.limits = {
             requestsPerMinute: 30,
             requestsPerDay: 1400,
-            tokensPerDay: 60000,
+            tokensPerDay: 80000,
             cooldownSeconds: 2
         };
     }
