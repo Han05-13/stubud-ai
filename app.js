@@ -19,9 +19,9 @@ class RateLimiter {
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                // Ensure tokensRemaining is set to 80000 if not present or invalid
+                // Ensure tokensRemaining is set to a reduced value if not present or invalid
                 if (!parsed.tokensRemaining || parsed.tokensRemaining < 0) {
-                    parsed.tokensRemaining = 80000;
+                    parsed.tokensRemaining = 67500; // Reduced from 80,000
                 }
                 return parsed;
             } catch (e) {
@@ -30,9 +30,9 @@ class RateLimiter {
         }
         
         return {
-            requestsThisMinute: 0,
-            requestsToday: 0,
-            tokensRemaining: 80000, // Start with 80,000 tokens
+            requestsThisMinute: 7, // Used 7 out of 30
+            requestsToday: 245, // Used 245 out of 1400
+            tokensRemaining: 67500, // Used 12,500 tokens out of 80,000
             lastRequestTime: 0,
             lastResetMinute: Date.now(),
             lastResetDay: new Date().toDateString()
