@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stubud AI - Your Academic AI Assistant</title>
+    <meta name="description" content="Transform your academic performance with AI-powered answer generation for 2, 13, and 15 mark questions">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <!-- Navigation -->
+    <nav class="container mx-auto px-4 py-6">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-600 rounded-full shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Stubud AI</span>
+            </div>
+            <div class="hidden md:flex gap-6">
+                <a href="index.html" class="text-blue-600 hover:text-blue-800 font-medium">Generator</a>
+                <a href="about.html" class="text-gray-600 hover:text-gray-800">About</a>
+                <a href="privacy.html" class="text-gray-600 hover:text-gray-800">Privacy</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-12 lg:py-20">
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Excel in Your Studies with AI
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-8 leading-relaxed">
+                Transform your academic performance with AI-powered answer generation. Get perfectly structured answers for 2, 13, and 15 mark questions with professional formatting and comprehensive coverage.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+                <a href="index.html" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    Start Generating Answers
+                </a>
+                <a href="about.html" class="w-full sm:w-auto border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-200">
+                    Learn More
+                </a>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="p-8 bg-white/90 backdrop-blur-sm border-0 shadow-xl rounded-xl text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Lightning Fast</h3>
+                <p class="text-gray-600 leading-relaxed">Get comprehensive answers in seconds, not hours of research. Our AI processes your questions instantly.</p>
+            </div>
+            
+            <div class="p-8 bg-white/90 backdrop-blur-sm border-0 shadow-xl rounded-xl text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Academic Quality</h3>
+                <p class="text-gray-600 leading-relaxed">Structured answers that follow academic standards and marking schemes for professional results.</p>
+            </div>
+            
+            <div class="p-8 bg-white/90 backdrop-blur-sm border-0 shadow-xl rounded-xl text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Multiple Formats</h3>
+                <p class="text-gray-600 leading-relaxed">Choose from 2, 13, or 15 mark formats to match your specific academic requirements.</p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 lg:p-12 text-white text-center mb-16">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-8">Trusted by Students Worldwide</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-4xl lg:text-5xl font-bold mb-2">80,000</div>
+                    <div class="text-blue-100">Daily Tokens Available</div>
+                </div>
+                <div>
+                    <div class="text-4xl lg:text-5xl font-bold mb-2">1,400</div>
+                    <div class="text-blue-100">Daily Requests Limit</div>
+                </div>
+                <div>
+                    <div class="text-4xl lg:text-5xl font-bold mb-2">3</div>
+                    <div class="text-blue-100">Answer Formats</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-12">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Enter Your Question</h3>
+                    <p class="text-gray-600">Type your academic question in the input field and select the appropriate mark format.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">AI Processing</h3>
+                    <p class="text-gray-600">Our advanced AI analyzes your question and generates a structured, comprehensive answer.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Get Your Answer</h3>
+                    <p class="text-gray-600">Receive a professionally formatted answer ready for your academic assignments.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="text-center bg-white/90 backdrop-blur-sm rounded-2xl p-8 lg:p-12 shadow-xl">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">Ready to Transform Your Studies?</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Join thousands of students who are already using Stubud AI to improve their academic performance and achieve better grades.</p>
+            <a href="index.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-lg text-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                Start Your Free Trial
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-blue-600 rounded-full">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold">Stubud AI</span>
+                    </div>
+                    <p class="text-gray-400">Empowering students worldwide with AI-powered academic assistance for better learning outcomes.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Answer Generator</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Email: support@stubud.ai</li>
+                        <li>Follow: @StubudAI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Stubud AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
