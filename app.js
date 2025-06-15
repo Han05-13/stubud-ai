@@ -1,3 +1,4 @@
+
 // Stubud AI - Academic Answer Generator
 // Main application logic
 
@@ -16,7 +17,12 @@ class RateLimiter {
         const saved = localStorage.getItem('rateLimitState');
         if (saved) {
             try {
-                return JSON.parse(saved);
+                const parsed = JSON.parse(saved);
+                // Ensure tokensRemaining is set to 80000 if not present or invalid
+                if (!parsed.tokensRemaining || parsed.tokensRemaining < 0) {
+                    parsed.tokensRemaining = 80000;
+                }
+                return parsed;
             } catch (e) {
                 console.warn('Failed to parse rate limit state from localStorage');
             }
