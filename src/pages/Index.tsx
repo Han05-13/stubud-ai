@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -106,9 +107,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Top Mobile Ad Container */}
-      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm">
-        <div className="w-80 h-12 bg-gray-200 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
-          <span className="text-xs text-gray-500 font-medium">Mobile Ad 320×50</span>
+      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm block md:hidden">
+        <div className="w-80 h-12 bg-gradient-to-r from-gray-200 to-gray-300 border-2 border-dashed border-gray-400 rounded flex items-center justify-center shadow-sm">
+          <span className="text-xs text-gray-600 font-medium">Mobile Ad Banner 320×50</span>
         </div>
       </div>
 
@@ -250,7 +251,7 @@ const Index = () => {
               )}
             </div>
 
-            <div className="min-h-64 lg:min-h-96 max-h-64 lg:max-h-96 overflow-y-auto">
+            <div className="min-h-64 lg:min-h-96 max-h-64 lg:max-h-96 overflow-y-auto border border-gray-100 rounded-lg p-4 bg-gray-50/50">
               {answer ? (
                 <div className="prose prose-slate max-w-none">
                   <div className="whitespace-pre-wrap text-gray-700 leading-relaxed text-sm lg:text-base text-justify">
@@ -334,9 +335,9 @@ const Index = () => {
       </div>
 
       {/* Bottom Mobile Ad Container */}
-      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm border-t border-gray-200/50">
-        <div className="w-80 h-12 bg-gray-200 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
-          <span className="text-xs text-gray-500 font-medium">Mobile Ad 320×50</span>
+      <div className="w-full flex justify-center py-2 lg:py-4 bg-white/50 backdrop-blur-sm border-t border-gray-200/50 block md:hidden">
+        <div className="w-80 h-12 bg-gradient-to-r from-gray-200 to-gray-300 border-2 border-dashed border-gray-400 rounded flex items-center justify-center shadow-sm">
+          <span className="text-xs text-gray-600 font-medium">Mobile Ad Banner 320×50</span>
         </div>
       </div>
     </div>
