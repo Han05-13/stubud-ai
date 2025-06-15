@@ -16,34 +16,41 @@ export const generateAnswer = async (question: string, marks: 2 | 13 | 15): Prom
     });
 
     const formatInstructions = {
-      2: "Provide a brief, concise answer in 2-3 sentences. Focus on the key points only. This should be suitable for a 2-mark academic question.",
-      13: "Provide a detailed explanation with multiple points, examples, and clear structure. Include relevant details and explanations that would merit 13 marks in an academic setting. Use bullet points, numbered lists, and clear sections. Format section headers like '**1. Introduction (2 marks)**' in bold using markdown.",
-      15: "Provide a comprehensive, well-structured answer with introduction, detailed explanation, examples, analysis, and conclusion. This should be thorough enough to merit full 15 marks in an academic examination. Include multiple sections, detailed analysis, and comprehensive coverage of the topic. Format all section headers like '**1. Introduction & Motivation (1 Mark)**' or '**2. Main Concepts (3 Marks)**' in bold using markdown formatting."
+      2: "Provide ONLY the most essential points in 2-3 short sentences. Focus strictly on the core concept and key definition. No examples or elaboration. This should be direct and concise for a 2-mark question.",
+      13: "Provide a structured answer with 4-6 key points only. Include essential concepts, one brief example, and critical details that directly answer the question. Avoid unnecessary elaboration. Use clear headings like '**1. Key Concept (2 marks)**' and be precise. Total content should merit exactly 13 marks - no more, no less.",
+      15: "Provide a comprehensive but focused answer with 5-7 main sections covering: introduction, core concepts, key applications/examples, analysis, and conclusion. Each section should contain only the most important information. Use clear headings like '**1. Introduction (2 marks)**' and ensure every point directly contributes to the answer. Avoid redundancy and filler content."
     };
 
     const prompt = `
 Question: ${question}
 
-Please provide an answer in the format suitable for a ${marks}-mark academic question.
+Please provide a focused academic answer suitable for a ${marks}-mark question.
 
-Instructions: ${formatInstructions[marks]}
+CRITICAL INSTRUCTIONS: ${formatInstructions[marks]}
 
-IMPORTANT FORMATTING RULES:
-- Use **bold text** for section headers (e.g., **1. Introduction & Motivation (1 Mark)**)
-- Use **bold text** for important terms and key concepts
-- Use bullet points and numbered lists for clarity
-- Structure your response with clear sections
-- Make sure to use markdown formatting for bold text
+FORMATTING REQUIREMENTS:
+- Use **bold text** for section headers (e.g., **1. Introduction (2 marks)**)
+- Use **bold text** for key terms and concepts only
+- Use bullet points sparingly and only when necessary
+- Keep content concise and directly relevant
+- Every sentence must add value to the answer
+- Avoid repetition and unnecessary explanations
 
-Please structure your response clearly and provide a comprehensive answer that demonstrates deep understanding of the topic.
+QUALITY STANDARDS:
+- Prioritize accuracy over length
+- Include only information that directly answers the question
+- Ensure each point justifies its mark allocation
+- Remove any filler or overly general statements
+
+Generate a precise, academic-quality answer that maximizes value within the ${marks}-mark constraint.
 `;
 
-    console.log('Generating answer with Gemini AI...');
+    console.log('Generating focused answer with Gemini AI...');
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
     
-    console.log('Answer generated successfully');
+    console.log('Focused answer generated successfully');
     return text;
     
   } catch (error) {
