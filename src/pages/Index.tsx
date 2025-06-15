@@ -47,6 +47,21 @@ const Index = () => {
     }
   };
 
+  // Function to render markdown bold text
+  const renderMarkdownText = (text: string) => {
+    // Split text by **bold** patterns and render them appropriately
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        // Remove the ** markers and render as bold
+        const boldText = part.slice(2, -2);
+        return <strong key={index} className="font-bold text-gray-800">{boldText}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Header */}
@@ -135,7 +150,7 @@ const Index = () => {
               {answer ? (
                 <div className="prose prose-slate max-w-none">
                   <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
-                    {answer}
+                    {renderMarkdownText(answer)}
                   </div>
                 </div>
               ) : (
