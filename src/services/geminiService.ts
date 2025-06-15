@@ -19,7 +19,7 @@ let lastResetTime = Date.now();
 const RATE_LIMITS = {
   requestsPerMinute: 30,
   requestsPerDay: 1400,
-  tokensPerDay: 60000,
+  tokensPerDay: 80000,
   minInterval: 2000 // 2 seconds between requests
 };
 

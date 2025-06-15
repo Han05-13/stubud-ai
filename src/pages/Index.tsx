@@ -113,6 +113,20 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Navigation */}
+      <nav className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Brain className="w-6 h-6 text-blue-600" />
+            <span className="text-xl font-bold text-gray-800">Stubud AI</span>
+          </div>
+          <div className="flex gap-4 text-sm">
+            <Link to="/about" className="text-blue-600 hover:text-blue-800 font-medium">About</Link>
+            <Link to="/privacy" className="text-blue-600 hover:text-blue-800 font-medium">Privacy</Link>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 lg:py-16">
         <div className="text-center mb-12 lg:mb-20">
@@ -161,7 +175,7 @@ const Index = () => {
                   Requests/day: {rateLimits.requestsToday}/1400
                 </Badge>
                 <Badge variant="outline" className="bg-white/50">
-                  Tokens/day: {rateLimits.tokensToday.toLocaleString()}/60,000
+                  Tokens/day: {rateLimits.tokensToday.toLocaleString()}/80,000
                 </Badge>
               </div>
             </div>
