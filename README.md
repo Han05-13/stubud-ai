@@ -1,73 +1,99 @@
-# Welcome to your Lovable project
 
-## Project info
+# Stubud AI - Static Site Deployment
 
-**URL**: https://lovable.dev/projects/d2b041bf-3ff0-4151-922c-f7e8ffc61cb0
+This is a complete static site build of the Stubud AI Academic Answer Generator. The application generates comprehensive academic answers for 2, 13, and 15 mark questions using Google's Gemini AI.
 
-## How can I edit this code?
+## Files Included
 
-There are several ways of editing your application.
+- `index.html` - Complete HTML structure with embedded Tailwind CSS
+- `styles.css` - Custom styles and responsive design
+- `app.js` - Full JavaScript application logic
+- `README.md` - This file with hosting instructions
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d2b041bf-3ff0-4151-922c-f7e8ffc61cb0) and start prompting.
+- ✅ AI-powered answer generation using Google Gemini API
+- ✅ Support for 2, 13, and 15 mark question formats
+- ✅ Rate limiting with local storage persistence
+- ✅ Responsive design for all devices
+- ✅ Academic-quality formatting
+- ✅ Real-time usage tracking
+- ✅ Mobile ad placeholder containers
 
-Changes made via Lovable will be committed automatically to this repo.
+## Hosting Options
 
-**Use your preferred IDE**
+### 1. GitHub Pages (Free)
+1. Create a new repository on GitHub
+2. Upload all files to the repository
+3. Go to Settings → Pages
+4. Select "Deploy from a branch" and choose `main`
+5. Your site will be available at `https://yourusername.github.io/repository-name`
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 2. Netlify (Free)
+1. Visit [netlify.com](https://netlify.com)
+2. Drag and drop the folder containing these files
+3. Your site will be deployed instantly with a random URL
+4. Optional: Connect a custom domain
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 3. Vercel (Free)
+1. Visit [vercel.com](https://vercel.com)
+2. Import from Git or drag and drop files
+3. Deploy instantly with automatic HTTPS
 
-Follow these steps:
+### 4. Traditional Web Hosting
+Upload all files to your web server's public directory (usually `public_html` or `www`).
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Browser Requirements
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- Modern browsers with ES6+ support
+- JavaScript enabled
+- Internet connection for Tailwind CSS CDN and Gemini API
 
-# Step 3: Install the necessary dependencies.
-npm i
+## API Configuration
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+The application uses Google's Gemini AI API. The API key is included in the code for demonstration purposes. For production use, consider:
 
-**Edit a file directly in GitHub**
+1. Implementing server-side API calls
+2. Using environment variables
+3. Adding additional security measures
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Rate Limiting
 
-**Use GitHub Codespaces**
+The application includes built-in rate limiting:
+- 30 requests per minute
+- 1,400 requests per day  
+- 60,000 tokens per day
+- 2-second cooldown between requests
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Rate limit data is stored in browser's localStorage and persists across sessions.
 
-## What technologies are used for this project?
+## Customization
 
-This project is built with:
+### Styling
+- Modify `styles.css` for custom styling
+- Tailwind classes can be customized in the `tailwind.config` section of `index.html`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Content
+- Update the header, features, and CTA sections in `index.html`
+- Modify the prompt templates in `app.js` for different answer formats
 
-## How can I deploy this project?
+### API Settings
+- Change the Gemini model in `app.js` (line with `gemini-2.0-flash-exp`)
+- Adjust rate limits in the `RateLimiter` class
+- Modify generation parameters like temperature and max tokens
 
-Simply open [Lovable](https://lovable.dev/projects/d2b041bf-3ff0-4151-922c-f7e8ffc61cb0) and click on Share -> Publish.
+## Mobile Ads
 
-## Can I connect a custom domain to my Lovable project?
+The template includes placeholder containers for mobile advertisements:
+- `#mobile-ad-top` - Top banner (16 units high)
+- `#mobile-ad-bottom` - Bottom banner (16 units high)
 
-Yes, you can!
+Replace the placeholder content with your ad network's code.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Support
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For issues or questions about the static site build, refer to the original Lovable project or create an issue in your repository.
+
+## License
+
+This is an educational project. Please ensure you comply with Google's Gemini API terms of service when using this application.

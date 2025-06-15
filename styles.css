@@ -1,0 +1,127 @@
+
+/* Custom styles for Stubud AI */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom prose styles for answer content */
+.prose {
+    color: #374151;
+    line-height: 1.8;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.prose strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.prose ul, .prose ol {
+    margin: 1rem 0;
+}
+
+.prose li {
+    margin: 0.5rem 0;
+}
+
+.prose p {
+    margin: 1rem 0;
+}
+
+/* Loading animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom button hover effects */
+button {
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Custom focus styles */
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    .prose {
+        font-size: 0.95rem;
+    }
+    
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    .text-4xl {
+        font-size: 2rem;
+    }
+    
+    .text-3xl {
+        font-size: 1.75rem;
+    }
+    
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+    
+    .text-xl {
+        font-size: 1.125rem;
+    }
+}
+
+/* Mobile ad containers */
+#mobile-ad-top, #mobile-ad-bottom {
+    background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+    border: 1px dashed #d1d5db;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Print styles */
+@media print {
+    #mobile-ad-top, #mobile-ad-bottom {
+        display: none !important;
+    }
+    
+    .bg-gradient-to-br {
+        background: white !important;
+    }
+}

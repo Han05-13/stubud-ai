@@ -1,25 +1,171 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stubud AI - Academic Answer Generator</title>
-    <meta name="description" content="AI-powered academic answer generator for 2, 13, and 15 mark questions" />
-    <meta name="author" content="Stubud AI" />
+    <meta name="description" content="AI-powered academic answer generator for 2, 13, and 15 mark questions">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <!-- Mobile Ad Container Top -->
+    <div id="mobile-ad-top" class="w-full h-16 bg-gray-100 border-b flex items-center justify-center text-gray-500 md:hidden">
+        <span class="text-sm">Ad Space - Mobile Top</span>
+    </div>
 
-    <meta property="og:title" content="Stubud AI - Academic Answer Generator" />
-    <meta property="og:description" content="AI-powered academic answer generator for 2, 13, and 15 mark questions" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="flex items-center justify-center mb-4">
+                <svg class="w-12 h-12 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <h1 class="text-4xl font-bold text-gray-800">Stubud AI</h1>
+            </div>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Generate comprehensive academic answers for 2, 13, and 15 mark questions using advanced AI technology
+            </p>
+        </header>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+        <!-- Main Content -->
+        <main class="space-y-8">
+            <!-- Input Section -->
+            <section class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Generate Your Answer</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="question" class="block text-sm font-medium text-gray-700 mb-2">
+                            Enter your question:
+                        </label>
+                        <textarea
+                            id="question"
+                            placeholder="Type your academic question here..."
+                            class="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                        ></textarea>
+                    </div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+                    <div>
+                        <label for="marks" class="block text-sm font-medium text-gray-700 mb-2">
+                            Select answer format:
+                        </label>
+                        <select
+                            id="marks"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                            <option value="2">2 Mark Question (Brief Answer)</option>
+                            <option value="13">13 Mark Question (Detailed Answer)</option>
+                            <option value="15">15 Mark Question (Comprehensive Answer)</option>
+                        </select>
+                    </div>
+
+                    <button
+                        id="generate-btn"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                        Generate Answer
+                    </button>
+                </div>
+            </section>
+
+            <!-- Rate Limit Status -->
+            <section class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-800 mb-3">API Usage Status</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white p-3 rounded-lg">
+                        <div class="text-gray-600">Requests this minute</div>
+                        <div class="text-xl font-semibold text-blue-600" id="requests-minute">30</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg">
+                        <div class="text-gray-600">Requests today</div>
+                        <div class="text-xl font-semibold text-green-600" id="requests-day">1400</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg">
+                        <div class="text-gray-600">Tokens today</div>
+                        <div class="text-xl font-semibold text-purple-600" id="tokens-day">60000</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Answer Section -->
+            <section id="answer-section" class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 hidden">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Generated Answer</h2>
+                <div id="answer-content" class="prose prose-lg max-w-none"></div>
+            </section>
+
+            <!-- Loading State -->
+            <section id="loading-section" class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 hidden">
+                <div class="flex items-center justify-center space-x-3">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <span class="text-lg text-gray-600">Generating your answer...</span>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                <h2 class="text-3xl font-bold text-center mb-8">Why Choose Stubud AI?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="bg-white bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Lightning Fast</h3>
+                        <p class="text-blue-100">Get comprehensive answers in seconds, not hours of research.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Academic Quality</h3>
+                        <p class="text-blue-100">Structured answers that follow academic standards and marking schemes.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white bg-opacity-20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Flexible Formats</h3>
+                        <p class="text-blue-100">Choose from 2, 13, or 15 mark formats to match your needs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="text-center bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Excel in Your Studies?</h2>
+                <p class="text-xl text-gray-600 mb-6">Join thousands of students who trust Stubud AI for their academic success.</p>
+                <button onclick="document.getElementById('question').focus()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors duration-200">
+                    Start Generating Answers
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mobile Ad Container Bottom -->
+    <div id="mobile-ad-bottom" class="w-full h-16 bg-gray-100 border-t flex items-center justify-center text-gray-500 md:hidden mt-8">
+        <span class="text-sm">Ad Space - Mobile Bottom</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
 </html>
