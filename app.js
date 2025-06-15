@@ -36,19 +36,6 @@ class RateLimiter {
         localStorage.setItem('rateLimitState', JSON.stringify(this.state));
     }
 
-    resetAllValues() {
-        this.state = {
-            requestsThisMinute: 0,
-            requestsToday: 0,
-            tokensToday: 0,
-            lastRequestTime: 0,
-            lastResetMinute: Date.now(),
-            lastResetDay: new Date().toDateString()
-        };
-        this.saveState();
-        console.log('Rate limiter values reset to 0');
-    }
-
     resetCountersIfNeeded() {
         const now = Date.now();
         const currentDay = new Date().toDateString();
@@ -214,10 +201,6 @@ class StubudApp {
 
     init() {
         this.bindEvents();
-        this.updateRateLimitDisplay();
-        
-        // Reset all values on page load
-        this.rateLimiter.resetAllValues();
         this.updateRateLimitDisplay();
         
         // Update rate limit display every 10 seconds
