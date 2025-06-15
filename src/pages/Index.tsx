@@ -1,11 +1,10 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle } from 'lucide-react';
-import { generateAnswer } from '@/services/geminiService';
+import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { generateAnswer, getRateLimitStatus } from '@/services/geminiService';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -13,6 +12,8 @@ const Index = () => {
   const [selectedMarks, setSelectedMarks] = useState<2 | 13 | 15>(2);
   const [answer, setAnswer] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [cooldownTime, setCooldownTime] = useState(0);
+  const [rateLimits, setRateLimits] = useState({ requestsThisMinute: 30, requestsToday: 1400, tokensToday: 60000 });
   const { toast } = useToast();
 
   const markOptions = [
@@ -20,6 +21,30 @@ const Index = () => {
     { value: 13 as const, label: '13 Mark', description: 'Detailed explanation' },
     { value: 15 as const, label: '15 Mark', description: 'Comprehensive analysis' }
   ];
+
+  // Update rate limit status
+  useEffect(() => {
+    const updateRateLimits = () => {
+      const limits = getRateLimitStatus();
+      setRateLimits(limits);
+    };
+
+    updateRateLimits();
+    const interval = setInterval(updateRateLimits, 5000); // Update every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Cooldown timer
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (cooldownTime > 0) {
+      timer = setTimeout(() => {
+        setCooldownTime(prev => prev - 1000);
+      }, 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [cooldownTime]);
 
   const handleGenerate = async () => {
     if (!question.trim()) {
@@ -35,13 +60,29 @@ const Index = () => {
     try {
       const generatedAnswer = await generateAnswer(question, selectedMarks);
       setAnswer(generatedAnswer);
-    } catch (error) {
+      setCooldownTime(2000); // 2 second cooldown
+    } catch (error: any) {
       console.error('Error generating answer:', error);
-      toast({
-        title: "Generation Failed",
-        description: "Failed to generate answer. Please try again.",
-        variant: "destructive"
-      });
+      
+      // Handle rate limit errors specifically
+      if (error.message.includes('Rate limit exceeded')) {
+        const waitMatch = error.message.match(/wait (\d+) seconds/);
+        if (waitMatch) {
+          const waitSeconds = parseInt(waitMatch[1]);
+          setCooldownTime(waitSeconds * 1000);
+        }
+        toast({
+          title: "Rate Limit Exceeded",
+          description: error.message,
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Generation Failed",
+          description: "Failed to generate answer. Please try again.",
+          variant: "destructive"
+        });
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -59,6 +100,8 @@ const Index = () => {
       return <span key={index}>{part}</span>;
     });
   };
+
+  const isButtonDisabled = isGenerating || !question.trim() || cooldownTime > 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
@@ -99,6 +142,29 @@ const Index = () => {
               <span className="text-sm lg:text-base font-medium text-gray-700">Structured Answers</span>
             </div>
           </div>
+        </div>
+
+        {/* Rate Limit Status */}
+        <div className="max-w-4xl mx-auto mb-8">
+          <Card className="p-4 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-gray-700">API Usage Status</span>
+              </div>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <Badge variant="outline" className="bg-white/50">
+                  Requests/min: {rateLimits.requestsThisMinute}/30
+                </Badge>
+                <Badge variant="outline" className="bg-white/50">
+                  Requests/day: {rateLimits.requestsToday}/1400
+                </Badge>
+                <Badge variant="outline" className="bg-white/50">
+                  Tokens/day: {rateLimits.tokensToday.toLocaleString()}/60,000
+                </Badge>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* Main Application */}
@@ -142,13 +208,18 @@ const Index = () => {
 
               <Button
                 onClick={handleGenerate}
-                disabled={isGenerating || !question.trim()}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 lg:py-4 text-base lg:text-lg font-medium"
+                disabled={isButtonDisabled}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 lg:py-4 text-base lg:text-lg font-medium disabled:opacity-50"
               >
                 {isGenerating ? (
                   <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                     Generating Answer...
+                  </>
+                ) : cooldownTime > 0 ? (
+                  <>
+                    <Clock className="w-5 h-5 mr-2" />
+                    Wait {Math.ceil(cooldownTime / 1000)}s
                   </>
                 ) : (
                   <>
@@ -157,6 +228,14 @@ const Index = () => {
                   </>
                 )}
               </Button>
+
+              {cooldownTime > 0 && (
+                <div className="text-center">
+                  <p className="text-sm text-gray-600">
+                    Cooldown active to prevent API overuse. Please wait {Math.ceil(cooldownTime / 1000)} seconds.
+                  </p>
+                </div>
+              )}
             </div>
           </Card>
 
