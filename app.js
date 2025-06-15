@@ -1,4 +1,3 @@
-
 // Stubud AI - Academic Answer Generator
 // Main application logic
 
@@ -26,7 +25,7 @@ class RateLimiter {
         return {
             requestsThisMinute: 0,
             requestsToday: 0,
-            tokensToday: 0,
+            tokensRemaining: 80000, // Start with 80,000 tokens
             lastRequestTime: 0,
             lastResetMinute: Date.now(),
             lastResetDay: new Date().toDateString()
@@ -44,7 +43,7 @@ class RateLimiter {
         // Reset daily counters if it's a new day
         if (this.state.lastResetDay !== currentDay) {
             this.state.requestsToday = 0;
-            this.state.tokensToday = 0;
+            this.state.tokensRemaining = this.limits.tokensPerDay; // Reset to 80,000
             this.state.lastResetDay = currentDay;
         }
         
@@ -88,8 +87,8 @@ class RateLimiter {
             };
         }
         
-        // Check token limit
-        if (this.state.tokensToday >= this.limits.tokensPerDay) {
+        // Check token limit - now checking if tokens remaining is less than estimated usage
+        if (this.state.tokensRemaining <= 0) {
             return {
                 allowed: false,
                 reason: 'Daily token limit exceeded'
@@ -105,8 +104,13 @@ class RateLimiter {
         
         this.state.requestsThisMinute++;
         this.state.requestsToday++;
-        this.state.tokensToday += estimatedTokens;
+        this.state.tokensRemaining -= estimatedTokens; // Subtract tokens instead of adding
         this.state.lastRequestTime = now;
+        
+        // Ensure tokens don't go below 0
+        if (this.state.tokensRemaining < 0) {
+            this.state.tokensRemaining = 0;
+        }
         
         this.saveState();
     }
@@ -117,7 +121,7 @@ class RateLimiter {
         return {
             requestsThisMinute: this.limits.requestsPerMinute - this.state.requestsThisMinute,
             requestsToday: this.limits.requestsPerDay - this.state.requestsToday,
-            tokensToday: this.limits.tokensPerDay - this.state.tokensToday
+            tokensToday: this.state.tokensRemaining // Now returns remaining tokens
         };
     }
 }
