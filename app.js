@@ -1,5 +1,4 @@
 
-
 // Stubud AI - Academic Answer Generator
 // Main application logic
 
@@ -12,6 +11,7 @@ class RateLimiter {
             tokensPerDay: 80000,
             cooldownSeconds: 2
         };
+        this.updateDisplay();
     }
 
     loadState() {
@@ -41,6 +41,7 @@ class RateLimiter {
 
     saveState() {
         localStorage.setItem('rateLimitState', JSON.stringify(this.state));
+        this.updateDisplay();
     }
 
     resetCountersIfNeeded() {
@@ -58,6 +59,24 @@ class RateLimiter {
         if (now - this.state.lastResetMinute >= 60000) {
             this.state.requestsThisMinute = 0;
             this.state.lastResetMinute = now;
+        }
+    }
+
+    updateDisplay() {
+        const remaining = this.getRemainingLimits();
+        
+        const requestsPerMinuteEl = document.getElementById('requests-per-minute');
+        const requestsPerDayEl = document.getElementById('requests-per-day');
+        const tokensPerDayEl = document.getElementById('tokens-per-day');
+        
+        if (requestsPerMinuteEl) {
+            requestsPerMinuteEl.textContent = remaining.requestsThisMinute;
+        }
+        if (requestsPerDayEl) {
+            requestsPerDayEl.textContent = remaining.requestsToday.toLocaleString();
+        }
+        if (tokensPerDayEl) {
+            tokensPerDayEl.textContent = remaining.tokensToday.toLocaleString();
         }
     }
 

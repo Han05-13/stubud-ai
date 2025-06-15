@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle, Clock } from 'lucide-react';
+import { Loader2, BookOpen, Brain, Zap, Target, Award, ArrowRight, CheckCircle, Clock, BarChart3 } from 'lucide-react';
 import { generateAnswer, getRateLimitStatus } from '@/services/geminiService';
 import { useToast } from '@/hooks/use-toast';
 
@@ -145,6 +145,31 @@ const Index = () => {
             </div>
           </div>
         </div>
+
+        {/* API Usage Status */}
+        <Card className="p-4 lg:p-6 bg-white/90 backdrop-blur-sm border-0 shadow-xl mb-6 lg:mb-8">
+          <div className="flex items-center gap-2 mb-4">
+            <BarChart3 className="w-5 h-5 text-blue-600" />
+            <h2 className="text-lg lg:text-xl font-semibold text-gray-800">API Usage Status</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-blue-50 rounded-lg p-4">
+              <div className="text-sm text-blue-600 mb-1">Requests per minute</div>
+              <div className="text-2xl font-bold text-blue-800">30</div>
+              <div className="text-xs text-blue-500">remaining</div>
+            </div>
+            <div className="bg-green-50 rounded-lg p-4">
+              <div className="text-sm text-green-600 mb-1">Requests per day</div>
+              <div className="text-2xl font-bold text-green-800">1,400</div>
+              <div className="text-xs text-green-500">remaining</div>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4">
+              <div className="text-sm text-purple-600 mb-1">Tokens per day</div>
+              <div className="text-2xl font-bold text-purple-800">80,000</div>
+              <div className="text-xs text-purple-500">remaining</div>
+            </div>
+          </div>
+        </Card>
 
         {/* Main Application */}
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 lg:gap-8">

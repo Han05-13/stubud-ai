@@ -57,6 +57,28 @@
             </p>
         </header>
 
+        <!-- API Usage Status -->
+        <section class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">API Usage Status</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <div class="text-sm text-blue-600 mb-1">Requests per minute</div>
+                    <div class="text-2xl font-bold text-blue-800" id="requests-per-minute">30</div>
+                    <div class="text-xs text-blue-500">remaining</div>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4">
+                    <div class="text-sm text-green-600 mb-1">Requests per day</div>
+                    <div class="text-2xl font-bold text-green-800" id="requests-per-day">1400</div>
+                    <div class="text-xs text-green-500">remaining</div>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4">
+                    <div class="text-sm text-purple-600 mb-1">Tokens per day</div>
+                    <div class="text-2xl font-bold text-purple-800" id="tokens-per-day">80,000</div>
+                    <div class="text-xs text-purple-500">remaining</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Main Content -->
         <main class="space-y-8">
             <!-- Input Section -->
